@@ -6,20 +6,14 @@
  */
 class Game {
   constructor(height, width, p1, p2){
-    // super(color);
     this.height = height;
     this.width = width;
     this.board = [];
     this.makeBoard();
     this.makeHtmlBoard();
-    // this.setPlayerColors();
     this.currPlayer = p1;
     this.player = [p1, p2]
   }
-  // setPlayerColors(){
-    
-  //   let player1 = new Player(p1);
-  // }
 
   makeBoard() {
     for (let y = 0; y < this.height; y++) {
@@ -169,28 +163,6 @@ btn.addEventListener("click", (e) => {
      this.color = color;
    }
  }
-
-
-// active player: 1 or 2 
-//let board = []; // array of rows, each row is array of cells  (board[y][x])
-
-/** makeBoard: create in-JS board structure:
- *   board = array of rows, each row is array of cells  (board[y][x])
- */
-
-// function makeBoard() {
-//   for (let y = 0; y < HEIGHT; y++) {
-//     board.push(Array.from({ length: WIDTH }));
-//   }
-// }
-
-/** makeHtmlBoard: make HTML table and row of column tops. */
-
-
-/** findSpotForCol: given column x, return top empty y (null if filled) */
-
-
-/** placeInTable: update DOM to place piece into HTML table of board */
 
 
 
