@@ -6,13 +6,20 @@
  */
 class Game {
   constructor(height, width){
+    // super(color);
     this.height = height;
     this.width = width;
     this.board = [];
-    this.currPlayer = 1;
     this.makeBoard();
     this.makeHtmlBoard();
+    // this.setPlayerColors();
+    this.currPlayer = 1;
+    this.player = ["player1","player2"]
   }
+  // setPlayerColors(){
+    
+  //   let player1 = new Player(p1);
+  // }
 
   makeBoard() {
     for (let y = 0; y < this.height; y++) {
@@ -23,6 +30,13 @@ class Game {
 
   makeHtmlBoard() {
     const board = document.getElementById('board');
+    board.innerHTML = "";
+    const p1Input = document.querySelector("#p1Color");
+    const p2Input = document.querySelector("#p2Color");
+    let p1 = p1Input.value;
+    let p2 = p2Input.value;
+    p1 = "";
+    p2 = "";
   
     // make column tops (clickable area for adding a piece to that column)
     const top = document.createElement('tr');
@@ -83,6 +97,7 @@ class Game {
   handleClick(evt) {
     // get x from ID of clicked cell
     const x = +evt.target.id;
+
   
     // get next spot in column (if none, ignore click)
     const y = this.findSpotForCol(x);
@@ -142,12 +157,21 @@ class Game {
   }
 } 
 
-let btn = document.querySelector('#start');
 
-btn.addEventListener('click', function (e){
+let btn = document.querySelector("#start");
+btn.addEventListener("click", function(e){
   e.preventDefault();
   new Game(6, 7);
 });
+
+
+
+ class Player {
+   constructor(color){
+     this.color = color;
+   }
+ }
+
 
 
 // active player: 1 or 2 
