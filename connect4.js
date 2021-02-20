@@ -40,7 +40,8 @@ class Game {
     // make main part of board
     for (let y = 0; y < this.height; y++) {
       const row = document.createElement('tr');
-  
+      row.setAttribute('id', 'row');
+      
       for (let x = 0; x < this.width; x++) {
         const cell = document.createElement('td');
         cell.setAttribute('id', `${y}-${x}`);
@@ -113,7 +114,7 @@ class Game {
     //   // Check four cells to see if they're all color of current player
     //   //  - cells: list of four (y, x) cells
     //   //  - returns true if all are legal coordinates & all match currPlayer
-    function win(cells) {
+      let win = (cells) => {
       return cells.every(
         ([y, x]) =>
           y >= 0 &&
@@ -122,6 +123,7 @@ class Game {
           x < this.width &&
           this.board[y][x] === this.currPlayer);
     }
+
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
         // get "check list" of 4 cells (starting here) for each of the different
@@ -130,7 +132,7 @@ class Game {
         const vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
         const diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
         const diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
-        win = win.bind(this);
+
         // find winner (only checking each win-possibility as needed)
         if (win(horiz) || win(vert) || win(diagDR) || win(diagDL)) {
           return true;
@@ -139,7 +141,15 @@ class Game {
     }
   }
 } 
-new Game(6, 7);
+
+let btn = document.querySelector('#start');
+
+btn.addEventListener('click', function (e){
+  e.preventDefault();
+  new Game(6, 7);
+});
+
+
 // active player: 1 or 2 
 //let board = []; // array of rows, each row is array of cells  (board[y][x])
 
