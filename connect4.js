@@ -10,10 +10,8 @@ class Game {
     this.width = width;
     this.board = [];
     this.currPlayer = 1;
-    this.htmlBoard = document.getElementById('board'); 
-    this.top = document.createElement('tr');
-    this.headCell = document.createElement('td');
-    this.cell = document.createElement('td');
+    this.makeBoard();
+    this.makeHtmlBoard();
   }
 
   makeBoard() {
@@ -24,30 +22,35 @@ class Game {
   }
 
   makeHtmlBoard() {
-    this.htmlBoard   //intialize variable here
+    const board = document.getElementById('board');
   
     // make column tops (clickable area for adding a piece to that column)
-    this.top.setAttribute('id', 'column-top');
-    this.top.addEventListener('click', handleClick.bind(null, this.top));
+    const top = document.createElement('tr');
+    top.setAttribute('id', 'column-top');
+    top.addEventListener('click', this.handleClick.bind(this));
   
     for (let x = 0; x < this.width; x++) {
-      this.headCell.setAttribute('id', x);
-      this.top.append(this.headCell);
-    } 
+      const headCell = document.createElement('td');
+      headCell.setAttribute('id', x);
+      top.append(headCell);
+    }
   
-    this.htmlBoard.append(this.top);
+    board.append(top);
   
     // make main part of board
     for (let y = 0; y < this.height; y++) {
+      const row = document.createElement('tr');
   
       for (let x = 0; x < this.width; x++) {
-        this.cell.setAttribute('id', `${y}-${x}`);
-        this.row.append(this.cell);
+        const cell = document.createElement('td');
+        cell.setAttribute('id', `${y}-${x}`);
+        row.append(cell);
       }
   
-      this.htmlBoard.append(this.row);
+      board.append(row);
     }
   }
+  
 
   findSpotForCol(x) {
     for (let y = this.height - 1; y >= 0; y--) {
@@ -138,11 +141,9 @@ class Game {
   //     }
   //   }
   // }
-  // this.makeBoard();
-  // this.makeHtmlBoard();
+
   
-}
-; // active player: 1 or 2 
+} // active player: 1 or 2 
 //let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 /** makeBoard: create in-JS board structure:
@@ -165,4 +166,4 @@ class Game {
 
 
 
-let board = new Game(6, 7);
+new Game(6, 7);
